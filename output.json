@@ -1,0 +1,2814 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Swagger Aseem",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": { "email": "apiteam@swagger.io" },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "13.233.122.83:3002",
+  "basePath": "/api/v1",
+  "tags": [
+    { "name": "masterdata", "description": "Master data for app" },
+    { "name": "vernacular", "description": "Vernacular data for the app" },
+    { "name": "candidate", "description": "Operations about Candidates" },
+    { "name": "application", "description": "Operations about application" },
+    { "name": "job", "description": "Search around job" }
+  ],
+  "schemes": ["https", "http"],
+  "paths": {
+    "/cityByCoordinates/${longitude}/${latitude}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "longitude",
+            "required": true,
+            "type": "string",
+            "minimum": 1,
+            "description": "longitude of city"
+          },
+          {
+            "in": "path",
+            "name": "latitude",
+            "required": true,
+            "type": "string",
+            "minimum": 1,
+            "description": "latitude of city"
+          }
+        ],
+        "tags": ["masterdata"],
+        "summary": "Get city by coordinates",
+        "description": "",
+        "operationId": "cityByLocation",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "isActive": { "type": "string" },
+                    "localityId": { "type": "string" },
+                    "_id": { "type": "string" },
+                    "cityName": { "type": "string" },
+                    "englishName": { "type": "string" },
+                    "hindiName": { "type": "string" },
+                    "latitude": { "type": "number" },
+                    "longitude": { "type": "number" },
+                    "imageLink": { "type": "string" },
+                    "kannadaName": { "type": "string" },
+                    "tamilName": { "type": "string" },
+                    "teluguName": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/city": {
+      "get": {
+        "tags": ["masterdata"],
+        "summary": "Get all the city List",
+        "description": "",
+        "operationId": "city",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": { "$ref": "#/definitions/City" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/famous/city": {
+      "get": {
+        "tags": ["masterdata"],
+        "summary": "Get famous city List",
+        "description": "",
+        "operationId": "famouscity",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": { "_id": { "type": "string" } },
+                        "isActive": { "type": "integer" },
+                        "createdDate": { "type": "string" },
+                        "cityName": { "type": "string" },
+                        "stateId": { "type": "string" },
+                        "country": { "type": "string" },
+                        "latitude": { "type": "integer" },
+                        "longitude": { "type": "integer" },
+                        "englishName": { "type": "string" },
+                        "hindiName": { "type": "string" },
+                        "kannadaName": { "type": "string" },
+                        "tamilName": { "type": "string" },
+                        "teluguName": { "type": "string" },
+                        "stateName": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/jobRole": {
+      "get": {
+        "tags": ["masterdata"],
+        "summary": "Get all BPSS job roles",
+        "description": "",
+        "operationId": "jobRole",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "bpssJobRoleName": { "type": "string" },
+                          "sectorName": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/job/jobByCategory": {
+      "get": {
+        "tags": ["job"],
+        "summary": "Get all BPSS job roles by categories",
+        "description": "",
+        "operationId": "jobRolecategory",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "description": "",
+                      "items": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "_id": { "type": "string", "description": "" },
+                          "description": {
+                            "type": "string",
+                            "description": ""
+                          },
+                          "imageUrl": { "type": "string", "description": "" },
+                          "createdAt": { "type": "string", "description": "" },
+                          "updatedAt": { "type": "string", "description": "" },
+                          "__v": { "type": "number", "description": "" },
+                          "iconUrl": { "type": "string", "description": "" },
+                          "name": { "type": "string", "description": "" },
+                          "jobRoles": {
+                            "type": "array",
+                            "description": "",
+                            "items": {
+                              "type": "object",
+                              "description": "",
+                              "properties": {
+                                "_id": { "type": "string", "description": "" },
+                                "createdAt": {
+                                  "type": "string",
+                                  "description": ""
+                                },
+                                "createdEpoch": {
+                                  "type": "number",
+                                  "description": ""
+                                },
+                                "lastUpdatedDate": {
+                                  "type": "string",
+                                  "description": ""
+                                },
+                                "sectorName": {
+                                  "type": "string",
+                                  "description": ""
+                                },
+                                "bpssJobRoleName": {
+                                  "type": "string",
+                                  "description": ""
+                                },
+                                "__v": { "type": "number", "description": "" },
+                                "jobCategory": {
+                                  "type": "string",
+                                  "description": ""
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "tags": ["masterdata"],
+        "summary": "Get BPSS skill for a given BPSS Job Role",
+        "description": "",
+        "operationId": "skill",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "jobrole",
+            "description": "jobrole",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": { "$ref": "#/definitions/SkillSetInput" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/vernac/versions": {
+      "get": {
+        "tags": ["vernacular"],
+        "summary": "Fetch vernac File versions for all laungage for text",
+        "description": "",
+        "operationId": "vernacVersiontext",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "response data.",
+                  "properties": {
+                    "text": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": { "language": { "type": "integer" } }
+                      }
+                    },
+                    "audio": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": { "language": { "type": "integer" } }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/vernac/text/language/{language}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "language",
+            "required": true,
+            "type": "string",
+            "minimum": 1,
+            "description": "language for which data to be fetched"
+          }
+        ],
+        "tags": ["vernacular"],
+        "summary": "Fetch vernac File Version of all language",
+        "description": "",
+        "operationId": "vernacFileText",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "response data.",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "version": { "type": "integer" },
+                        "data": {
+                          "type": "object",
+                          "properties": { "key1": { "type": "string" } }
+                        },
+                        "highlight": {
+                          "type": "object",
+                          "properties": {
+                            "key1": {
+                              "type": "array",
+                              "items": { "type": "integer" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/vernac/audio/language/{language}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "language",
+            "required": true,
+            "type": "string",
+            "minimum": 1,
+            "description": "language for which data to be fetched"
+          }
+        ],
+        "tags": ["vernacular"],
+        "summary": "Fetch vernac File Version of all language",
+        "description": "",
+        "operationId": "vernacFileAudio",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "response data.",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "version": { "type": "integer" },
+                        "data": {
+                          "type": "object",
+                          "properties": { "key1": { "type": "string" } }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/candidate/profile": {
+      "put": {
+        "tags": ["candidate"],
+        "summary": "Verify mobile number and generate OTP",
+        "description": "",
+        "operationId": "updateCandidate",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "candidate id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "Candidate Info",
+            "description": "other details",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CandidateUpdate" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "status": { "type": "string", "description": "" },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "type": "object",
+                    "description": "",
+                    "properties": {
+                      "reachability": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "sms": {
+                            "type": "object",
+                            "description": "",
+                            "properties": {
+                              "reachable": {
+                                "type": "boolean",
+                                "description": ""
+                              }
+                            }
+                          },
+                          "whatsapp": {
+                            "type": "object",
+                            "description": "",
+                            "properties": {
+                              "reachable": {
+                                "type": "boolean",
+                                "description": ""
+                              }
+                            }
+                          },
+                          "app": {
+                            "type": "object",
+                            "description": "",
+                            "properties": {
+                              "reachable": {
+                                "type": "boolean",
+                                "description": ""
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "address": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "address": { "type": "string", "description": "" },
+                          "pinCode": { "type": "number", "description": "" },
+                          "district": { "type": "string", "description": "" },
+                          "state": { "type": "string", "description": "" }
+                        }
+                      },
+                      "expectedSalary": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "maximum": { "type": "number", "description": "" },
+                          "minimum": { "type": "number", "description": "" }
+                        }
+                      },
+                      "bankAccount": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "accountNumber": {
+                            "type": "number",
+                            "description": ""
+                          },
+                          "IFSC": { "type": "string", "description": "" },
+                          "bankName": { "type": "string", "description": "" }
+                        }
+                      },
+                      "whatsAppConsent": {
+                        "type": "boolean",
+                        "description": ""
+                      },
+                      "communicationLanguage": {
+                        "type": "array",
+                        "description": "",
+                        "items": { "type": "string", "description": "" }
+                      },
+                      "_id": { "type": "string", "description": "" },
+                      "name": { "type": "string", "description": "" },
+                      "mobileNo": { "type": "number", "description": "" },
+                      "gender": { "type": "string", "description": "" },
+                      "highestEducation": {
+                        "type": "string",
+                        "description": ""
+                      },
+                      "age": { "type": "number", "description": "" },
+                      "supplyType": { "type": "number", "description": "" },
+                      "district": { "type": "string", "description": "" },
+                      "state": { "type": "string", "description": "" },
+                      "identificationDocuments": {
+                        "type": "array",
+                        "description": "",
+                        "items": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "_id": { "type": "string", "description": "" },
+                            "imageUrl": { "type": "string", "description": "" },
+                            "type": { "type": "string", "description": "" },
+                            "number": { "type": "string", "description": "" },
+                            "isValid": { "type": "boolean", "description": "" }
+                          }
+                        }
+                      },
+                      "__v": { "type": "number", "description": "" },
+                      "createdAt": { "type": "string", "description": "" },
+                      "updatedAt": { "type": "string", "description": "" },
+                      "profileDetails": { "type": "string", "description": "" },
+                      "currentEmploymentStatus": {
+                        "type": "string",
+                        "description": ""
+                      },
+                      "currentJobRole": { "type": "string", "description": "" },
+                      "currentLocation": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "type": { "type": "string", "description": "" },
+                          "coordinates": {
+                            "type": "array",
+                            "description": "",
+                            "items": { "type": "number", "description": "" }
+                          },
+                          "_id": { "type": "string", "description": "" }
+                        }
+                      },
+                      "currentSalary": { "type": "string", "description": "" },
+                      "currentWorkingCompany": {
+                        "type": "string",
+                        "description": ""
+                      },
+                      "emergencyContact": {
+                        "type": "number",
+                        "description": ""
+                      },
+                      "photoURL": { "type": "string", "description": "" },
+                      "totalExperience": { "type": "number", "description": "" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      },
+      "get": {
+        "tags": ["candidate"],
+        "summary": "Get candidate by Id",
+        "description": "",
+        "operationId": "candidateById",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "status": { "type": "string", "description": "" },
+                "data": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "_id": { "type": "string", "description": "" },
+                    "reachability": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "sms": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "reachable": {
+                              "type": "boolean",
+                              "description": ""
+                            }
+                          }
+                        },
+                        "whatsapp": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "reachable": {
+                              "type": "boolean",
+                              "description": ""
+                            }
+                          }
+                        },
+                        "app": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "reachable": {
+                              "type": "boolean",
+                              "description": ""
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "whatsAppConsent": { "type": "boolean", "description": "" },
+                    "communicationLanguage": {
+                      "type": "array",
+                      "description": "",
+                      "items": { "type": "string", "description": "" }
+                    },
+                    "name": { "type": "string", "description": "" },
+                    "mobileNo": { "type": "number", "description": "" },
+                    "gender": { "type": "string", "description": "" },
+                    "highestEducation": { "type": "string", "description": "" },
+                    "age": { "type": "number", "description": "" },
+                    "supplyType": { "type": "number", "description": "" },
+                    "district": { "type": "string", "description": "" },
+                    "state": { "type": "string", "description": "" },
+                    "identificationDocuments": {
+                      "type": "array",
+                      "description": "",
+                      "items": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "_id": { "type": "string", "description": "" },
+                          "imageUrl": { "type": "string", "description": "" },
+                          "type": { "type": "string", "description": "" },
+                          "number": { "type": "string", "description": "" },
+                          "isValid": { "type": "boolean", "description": "" }
+                        }
+                      }
+                    },
+                    "__v": { "type": "number", "description": "" },
+                    "createdAt": { "type": "string", "description": "" },
+                    "updatedAt": { "type": "string", "description": "" },
+                    "profileDetails": { "type": "string", "description": "" },
+                    "address": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "address": { "type": "string", "description": "" },
+                        "pinCode": { "type": "number", "description": "" },
+                        "district": { "type": "string", "description": "" },
+                        "state": { "type": "string", "description": "" }
+                      }
+                    },
+                    "bankAccount": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "accountNumber": {
+                          "type": "number",
+                          "description": ""
+                        },
+                        "IFSC": { "type": "string", "description": "" },
+                        "bankName": { "type": "string", "description": "" }
+                      }
+                    },
+                    "currentEmploymentStatus": {
+                      "type": "string",
+                      "description": ""
+                    },
+                    "currentJobRole": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "_id": { "type": "string", "description": "" },
+                        "createdAt": { "type": "string", "description": "" },
+                        "createdEpoch": { "type": "number", "description": "" },
+                        "lastUpdatedDate": {
+                          "type": "string",
+                          "description": ""
+                        },
+                        "sectorName": { "type": "string", "description": "" },
+                        "bpssJobRoleName": {
+                          "type": "string",
+                          "description": ""
+                        },
+                        "__v": { "type": "number", "description": "" },
+                        "jobCategory": { "type": "string", "description": "" }
+                      }
+                    },
+                    "currentLocation": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "type": { "type": "string", "description": "" },
+                        "coordinates": {
+                          "type": "array",
+                          "description": "",
+                          "items": { "type": "number", "description": "" }
+                        },
+                        "_id": { "type": "string", "description": "" }
+                      }
+                    },
+                    "currentSalary": { "type": "string", "description": "" },
+                    "currentWorkingCompany": {
+                      "type": "string",
+                      "description": ""
+                    },
+                    "emergencyContact": { "type": "number", "description": "" },
+                    "expectedSalary": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "maximum": { "type": "number", "description": "" },
+                        "minimum": { "type": "number", "description": "" }
+                      }
+                    },
+                    "photoURL": { "type": "string", "description": "" },
+                    "totalExperience": { "type": "number", "description": "" },
+                    "candidateProfile": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "_id": { "type": "string", "description": "" },
+                        "willingToRelocate": {
+                          "type": "boolean",
+                          "description": ""
+                        },
+                        "preferredGoals": {
+                          "type": "array",
+                          "description": "",
+                          "items": { "type": "string", "description": "" }
+                        },
+                        "preferredJobCategory": {
+                          "type": "array",
+                          "description": "",
+                          "items": { "type": "string", "description": "" }
+                        },
+                        "preferredJobRole": {
+                          "type": "array",
+                          "description": "",
+                          "items": { "type": "string", "description": "" }
+                        },
+                        "pastCompanies": {
+                          "type": "array",
+                          "description": "",
+                          "items": { "type": "string", "description": "" }
+                        },
+                        "pastJobRoles": {
+                          "type": "array",
+                          "description": "",
+                          "items": { "type": "string", "description": "" }
+                        },
+                        "preferredLocation": {
+                          "type": "array",
+                          "description": "",
+                          "items": {
+                            "type": "object",
+                            "description": "",
+                            "properties": {
+                              "_id": { "type": "string", "description": "" },
+                              "state": { "type": "string", "description": "" },
+                              "district": {
+                                "type": "string",
+                                "description": ""
+                              },
+                              "coordinates": {
+                                "type": "object",
+                                "description": "",
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "description": ""
+                                  },
+                                  "coordinates": {
+                                    "type": "array",
+                                    "description": "",
+                                    "items": {
+                                      "type": "number",
+                                      "description": ""
+                                    }
+                                  },
+                                  "_id": { "type": "string", "description": "" }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "certificate": {
+                          "type": "array",
+                          "description": "",
+                          "items": {
+                            "type": "object",
+                            "description": "",
+                            "properties": {
+                              "CertificateSchema": {
+                                "type": "object",
+                                "description": "",
+                                "properties": {
+                                  "skills": {
+                                    "type": "array",
+                                    "description": "",
+                                    "items": {
+                                      "type": "integer",
+                                      "nullable": true
+                                    }
+                                  }
+                                }
+                              },
+                              "_id": { "type": "string", "description": "" }
+                            }
+                          }
+                        },
+                        "__v": { "type": "number", "description": "" },
+                        "createdAt": { "type": "string", "description": "" },
+                        "updatedAt": { "type": "string", "description": "" }
+                      }
+                    },
+                    "preferredGoals": {
+                      "type": "array",
+                      "description": "",
+                      "items": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "_id": { "type": "string", "description": "" },
+                          "name": { "type": "string", "description": "" },
+                          "description": {
+                            "type": "string",
+                            "description": ""
+                          },
+                          "createdAt": { "type": "string", "description": "" },
+                          "updatedAt": { "type": "string", "description": "" },
+                          "__v": { "type": "number", "description": "" },
+                          "imageUrl": { "type": "string", "description": "" }
+                        }
+                      }
+                    },
+                    "preferredJobCategory": {
+                      "type": "array",
+                      "description": "",
+                      "items": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "_id": { "type": "string", "description": "" },
+                          "description": {
+                            "type": "string",
+                            "description": ""
+                          },
+                          "imageUrl": { "type": "string", "description": "" },
+                          "createdAt": { "type": "string", "description": "" },
+                          "updatedAt": { "type": "string", "description": "" },
+                          "__v": { "type": "number", "description": "" },
+                          "iconUrl": { "type": "string", "description": "" },
+                          "name": { "type": "string", "description": "" }
+                        }
+                      }
+                    },
+                    "preferredJobRole": {
+                      "type": "array",
+                      "description": "",
+                      "items": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "_id": { "type": "string", "description": "" },
+                          "createdAt": { "type": "string", "description": "" },
+                          "createdEpoch": {
+                            "type": "number",
+                            "description": ""
+                          },
+                          "lastUpdatedDate": {
+                            "type": "string",
+                            "description": ""
+                          },
+                          "sectorName": { "type": "string", "description": "" },
+                          "bpssJobRoleName": {
+                            "type": "string",
+                            "description": ""
+                          },
+                          "__v": { "type": "number", "description": "" },
+                          "jobCategory": { "type": "string", "description": "" }
+                        }
+                      }
+                    },
+                    "pastJobRoles": {
+                      "type": "array",
+                      "description": "",
+                      "items": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "_id": { "type": "string", "description": "" },
+                          "createdAt": { "type": "string", "description": "" },
+                          "createdEpoch": {
+                            "type": "number",
+                            "description": ""
+                          },
+                          "lastUpdatedDate": {
+                            "type": "string",
+                            "description": ""
+                          },
+                          "sectorName": { "type": "string", "description": "" },
+                          "bpssJobRoleName": {
+                            "type": "string",
+                            "description": ""
+                          },
+                          "__v": { "type": "number", "description": "" },
+                          "jobCategory": { "type": "string", "description": "" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/candidate": {
+      "post": {
+        "tags": ["candidate"],
+        "summary": "Verify mobile number and generate OTP",
+        "description": "",
+        "operationId": "verifyMobileNumber",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Candidate Info",
+            "description": "generate OTP for candidate",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["mobileNo"],
+              "properties": { "mobileNo": { "type": "number" } }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "OTP sent successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/candidate/validateOTP": {
+      "post": {
+        "tags": ["candidate"],
+        "summary": "Validate mobile OTP and capture other info",
+        "description": "",
+        "operationId": "validateOTP",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Candidate Info",
+            "description": "verify OTP of candidate",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["mobileNo", "otp", "fcmToken", "androidId"],
+              "properties": {
+                "mobileNo": { "type": "number" },
+                "otp": { "type": "number" },
+                "fcmToken": { "type": "string" },
+                "androidId": { "type": "string" },
+                "userLocation": { "$ref": "#/definitions/UserLocation" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "access token of user"
+                    },
+                    "user": { "$ref": "#/definitions/Candidate" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/candidate/logout": {
+      "post": {
+        "tags": ["candidate"],
+        "summary": "Verify mobile number and generate OTP",
+        "description": "",
+        "operationId": "logout",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": { "description": "Ok" },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/candidate/addReferral": {
+      "post": {
+        "tags": ["candidate"],
+        "summary": "Add referal code",
+        "description": "",
+        "operationId": "addReferal",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Token Info",
+            "description": "add referal code",
+            "schema": {
+              "type": "object",
+              "required": ["referredTo", "inputCode"],
+              "properties": {
+                "referredTo": { "type": "string" },
+                "inputCode": { "type": "string" },
+                "referralMedium": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Ok" },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/candidate/getReferral": {
+      "get": {
+        "tags": ["candidate"],
+        "summary": "get referal code",
+        "description": "",
+        "operationId": "getReferal",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "referral": {
+                      "type": "string",
+                      "description": "referral code of user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/candidate/getAllReferral": {
+      "get": {
+        "tags": ["candidate"],
+        "summary": "get all referal applied",
+        "description": "",
+        "operationId": "getAllReferal",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "referrals": {
+                      "type": "array",
+                      "description": "all refferals applied",
+                      "items": { "$ref": "#/definitions/Referal" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/job/applyJob": {
+      "post": {
+        "tags": ["job"],
+        "summary": "Apply for new job",
+        "description": "",
+        "operationId": "applyForJob",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Job Info",
+            "description": "other details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hiringRequestId": {
+                  "type": "string",
+                  "description": "hiring request id"
+                },
+                "hiringLocationId": {
+                  "type": "string",
+                  "description": "_id of subschema hiring request id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "fulfillment": { "$ref": "#/definitions/Fulfillment" },
+                    "jobApplicationId": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/application/{id}": {
+      "put": {
+        "tags": ["application"],
+        "summary": "Update application from id\"",
+        "description": "",
+        "operationId": "updateJob",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          { "in": "path", "name": "id", "required": true, "type": "string" },
+          {
+            "in": "body",
+            "name": "Job Info",
+            "description": "other details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isContacted": { "type": "boolean", "description": "user id" },
+                "fullDate": { "type": "string" },
+                "scheduled_day": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "application": { "$ref": "#/definitions/Application" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/application/{appid}": {
+      "get": {
+        "tags": ["application"],
+        "summary": "get application from id\"",
+        "description": "",
+        "operationId": "getApplication",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          { "in": "path", "name": "appid", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "The user ID.",
+                  "properties": {
+                    "application": { "$ref": "#/definitions/Application" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/application/search": {
+      "post": {
+        "tags": ["application"],
+        "summary": "search application",
+        "description": "",
+        "operationId": "getAllApplication",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Application criteria",
+            "description": "other details",
+            "schema": { "$ref": "#/definitions/SearchInputWithPagination" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "$ref": "#/definitions/SearchOutputWithPaginationApplication"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/job/search": {
+      "post": {
+        "tags": ["job"],
+        "summary": "Search jobs",
+        "description": "search for job",
+        "operationId": "searchJob",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Job criteria",
+            "description": "other details",
+            "schema": { "$ref": "#/definitions/SearchInputWithPagination" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "$ref": "#/definitions/SearchOutputWithPaginationJob"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/job/{id}": {
+      "post": {
+        "tags": ["job"],
+        "summary": "Search jobs",
+        "description": "get job detail",
+        "operationId": "jobDetail",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "job id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "location Info",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "location": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "long": { "type": "number", "description": "" },
+                    "lat": { "type": "number", "description": "" }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": { "$ref": "#/definitions/JobDetail" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/job/similarJobs": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": { "type": "string" },
+            "required": true,
+            "description": "job id"
+          }
+        ],
+        "tags": ["job"],
+        "summary": "get Similar jobs",
+        "operationId": "similarJobs",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/JobDetail" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/job/getCompany": {
+      "get": {
+        "tags": ["job"],
+        "summary": "Search jobs",
+        "description": "get unique company detail",
+        "operationId": "jobCompany",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "companies": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/job/favourite": {
+      "get": {
+        "tags": ["job"],
+        "summary": "Saved jobs",
+        "description": "get saved jobs detail",
+        "operationId": "favouritejobDetail",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "job id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/JobDetail" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      },
+      "post": {
+        "tags": ["job"],
+        "summary": "Save job",
+        "description": "save jobs detail",
+        "operationId": "createfavouritejob",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "create job",
+            "description": "job details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "job": { "type": "string", "description": "Object Id of jobs" },
+                "hiringRequestId": {
+                  "type": "string",
+                  "description": "ObjectId of hiring request"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "status": { "type": "string", "description": "" },
+                "data": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "n": { "type": "number", "description": "" },
+                    "nModified": { "type": "number", "description": "" },
+                    "upserted": {
+                      "type": "array",
+                      "description": "",
+                      "items": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "index": { "type": "number", "description": "" },
+                          "_id": { "type": "string", "description": "" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/goal": {
+      "get": {
+        "tags": ["masterdata"],
+        "summary": "get goals list",
+        "description": "",
+        "operationId": "getgoals",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "type": "object",
+                    "description": "",
+                    "properties": {
+                      "name": { "type": "string", "description": "" },
+                      "description": { "type": "string", "description": "" },
+                      "imageUrl": { "type": "string", "description": "" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/job/categories": {
+      "get": {
+        "tags": ["masterdata"],
+        "summary": "get job categories",
+        "description": "",
+        "operationId": "getJobCategories",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "status": { "type": "string", "description": "" },
+                    "data": {
+                      "type": "array",
+                      "description": "",
+                      "items": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "name": { "type": "string", "description": "" },
+                          "imageUrl": { "type": "string", "description": "" },
+                          "iconUrl": { "type": "string", "description": "" },
+                          "description": { "type": "string", "description": "" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/languages": {
+      "get": {
+        "tags": ["masterdata"],
+        "summary": "get languages list",
+        "description": "",
+        "operationId": "getlanguagess",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "$ref": "#/definitions/ResponseCode" },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "type": "object",
+                    "description": "",
+                    "properties": {
+                      "language": { "type": "string", "description": "" },
+                      "iconCharacter": { "type": "string", "description": "" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": { "type": "apiKey", "name": "api_key", "in": "header" }
+  },
+  "definitions": {
+    "City": {
+      "type": "object",
+      "properties": {
+        "cityName": { "type": "string" },
+        "state": { "type": "string" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" }
+      }
+    },
+    "Language": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "number" },
+        "data": { "type": "object" }
+      }
+    },
+    "Version": {
+      "type": "array",
+      "items": { "type": "object" },
+      "properties": {
+        "version": { "type": "number" },
+        "Language": { "type": "string" }
+      }
+    },
+    "SkillSetInput": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "experience": { "type": "number" }
+      }
+    },
+    "JobRoleInput": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "skillSet": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SkillSetInput" }
+        }
+      }
+    },
+    "CandidateUpdate": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "candidateDetails": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "emergencyContact": { "type": "number", "description": "" },
+            "photoURL": { "type": "string", "description": "" },
+            "currentJobRole": { "type": "string", "description": "" },
+            "currentLocation": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "type": { "type": "string", "description": "" },
+                "coordinates": {
+                  "type": "array",
+                  "description": "",
+                  "items": { "type": "number", "description": "" }
+                }
+              }
+            },
+            "reachability": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "sms": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "reachable": { "type": "boolean", "description": "" }
+                  }
+                },
+                "whatsapp": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "reachable": { "type": "boolean", "description": "" }
+                  }
+                },
+                "app": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "reachable": { "type": "boolean", "description": "" }
+                  }
+                }
+              }
+            },
+            "whatsAppConsent": { "type": "boolean", "description": "" },
+            "communicationLanguage": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "name": { "type": "string", "description": "" },
+            "mobileNo": { "type": "number", "description": "" },
+            "gender": { "type": "string", "description": "" },
+            "highestEducation": { "type": "string", "description": "" },
+            "age": { "type": "number", "description": "" },
+            "district": { "type": "string", "description": "" },
+            "state": { "type": "string", "description": "" },
+            "identificationDocuments": {
+              "type": "array",
+              "description": "",
+              "items": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                  "imageUrl": { "type": "string", "description": "" },
+                  "type": { "type": "string", "description": "" },
+                  "number": { "type": "string", "description": "" },
+                  "isValid": { "type": "boolean", "description": "" }
+                }
+              }
+            },
+            "currentSalary": { "type": "number", "description": "" },
+            "currentEmploymentStatus": { "type": "string", "description": "" },
+            "currentWorkingCompany": { "type": "string", "description": "" },
+            "address": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "address": { "type": "string", "description": "" },
+                "pinCode": { "type": "number", "description": "" },
+                "district": { "type": "string", "description": "" },
+                "state": { "type": "string", "description": "" }
+              }
+            },
+            "totalExperience": { "type": "number", "description": "" },
+            "expectedSalary": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "maximum": { "type": "number", "description": "" },
+                "minimum": { "type": "number", "description": "" }
+              }
+            },
+            "bankAccount": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "accountNumber": { "type": "number", "description": "" },
+                "IFSC": { "type": "string", "description": "" },
+                "bankName": { "type": "string", "description": "" }
+              }
+            }
+          }
+        },
+        "candidateProfile": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "willingToRelocate": { "type": "boolean", "description": "" },
+            "preferredGoals": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "preferredJobCategory": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "preferredJobRole": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "pastCompanies": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "pastJobRoles": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "preferredLocation": {
+              "type": "array",
+              "description": "",
+              "items": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                  "state": { "type": "string", "description": "" },
+                  "district": { "type": "string", "description": "" },
+                  "coordinates": {
+                    "type": "object",
+                    "description": "",
+                    "properties": {
+                      "type": { "type": "string", "description": "" },
+                      "coordinates": {
+                        "type": "array",
+                        "description": "",
+                        "items": { "type": "number", "description": "" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "certificate": {
+              "type": "array",
+              "description": "",
+              "items": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                  "name": { "type": "string", "description": "" },
+                  "imageUrl": { "type": "string", "description": "" },
+                  "skills": {
+                    "type": "array",
+                    "description": "",
+                    "items": { "type": "string", "description": "" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "assests": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "Bike": {
+              "type": "object",
+              "description": "",
+              "properties": {
+                "location": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "state": { "type": "string", "description": "" },
+                    "district": { "type": "string", "description": "" },
+                    "coordinates": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "type": { "type": "string", "description": "" },
+                        "coordinates": {
+                          "type": "array",
+                          "description": "",
+                          "items": { "type": "number", "description": "" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "SmartPhone": { "type": "boolean", "description": "" },
+            "Computer": { "type": "boolean", "description": "" }
+          }
+        }
+      }
+    },
+    "Candidate": {
+      "type": "object",
+      "properties": { "name": { "type": "string" } }
+    },
+    "Referal": {
+      "type": "object",
+      "properties": {
+        "referredByName": { "type": "string" },
+        "referredById": { "type": "string" },
+        "mobileNumber": { "type": "string" },
+        "status": { "type": "string" },
+        "createAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "ResponseCode": { "type": "string", "enum": ["success"] },
+    "ResponseCodeError": { "type": "string", "enum": ["error", "fail"] },
+    "UserLocation": { "type": "object", "description": "location" },
+    "HiringCenter": {
+      "type": "object",
+      "properties": {
+        "city": { "type": "string" },
+        "areaName": { "type": "string" },
+        "location": { "$ref": "#/definitions/UserLocation" },
+        "address": { "type": "string" }
+      }
+    },
+    "Fulfillment": {
+      "type": "object",
+      "properties": {
+        "localityName": { "type": "array", "items": { "type": "string" } },
+        "supplyType": { "type": "integer" },
+        "skipinterviewDone": { "type": "boolean" },
+        "screeningStatus": { "type": "boolean" },
+        "interviewAttended": { "type": "boolean" },
+        "interviewStatus": { "type": "boolean" },
+        "resultState": { "type": "string" },
+        "joinedStatus": { "type": "string" },
+        "notAttended": { "type": "boolean" },
+        "_id": { "type": "string" },
+        "hiringRequestId": { "type": "string" },
+        "ipId": { "type": "string" },
+        "job": { "type": "string" },
+        "tcDistrict": { "type": "string" },
+        "person": { "type": "string" },
+        "personId": { "type": "string" },
+        "createdEpoch": { "type": "integer" },
+        "leadExpired": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "boolean" },
+            "_id": { "type": "string" }
+          }
+        },
+        "channelType": { "type": "string" },
+        "skillSet": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Job": {
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "experience": { "type": "string" },
+        "hiringCenter": { "$ref": "#/definitions/HiringCenter" }
+      }
+    },
+    "Application": {
+      "type": "object",
+      "properties": {
+        "appliedTS": { "type": "string" },
+        "scheduledDay": { "type": "string" },
+        "status": { "type": "string" },
+        "localityName": { "type": "array", "items": { "type": "string" } },
+        "job": { "$ref": "#/definitions/Job" },
+        "hiringCenter": { "$ref": "#/definitions/HiringCenter" },
+        "fulfillment": { "$ref": "#/definitions/Fulfillment" }
+      }
+    },
+    "SearchInputWithPagination": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": { "type": "string" },
+              "ops": {
+                "type": "string",
+                "enum": [
+                  "gt",
+                  "lt",
+                  "gte",
+                  "lte",
+                  "eq",
+                  "ne",
+                  "in",
+                  "nin",
+                  "or"
+                ]
+              },
+              "value": {
+                "type": "string",
+                "description": "string or array of string or array of nested query"
+              }
+            }
+          }
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": { "type": "string" },
+              "order": { "enum": ["asc", "desc"] }
+            }
+          }
+        },
+        "pageOption": {
+          "type": "object",
+          "properties": {
+            "skip": { "type": "number" },
+            "limit": { "type": "number" }
+          }
+        }
+      }
+    },
+    "SearchOutputWithPaginationJob": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/JobPreview" }
+        },
+        "total": { "type": "number" },
+        "pageOption": {
+          "type": "object",
+          "properties": {
+            "skip": { "type": "number" },
+            "limit": { "type": "number" }
+          }
+        }
+      }
+    },
+    "SearchOutputWithPaginationApplication": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ApplicationPreview" }
+        },
+        "total": { "type": "number" },
+        "pageOption": {
+          "type": "object",
+          "properties": {
+            "skip": { "type": "number" },
+            "limit": { "type": "number" }
+          }
+        }
+      }
+    },
+    "ApplicationPreview": {
+      "type": "object",
+      "properties": { "name": { "type": "string" } }
+    },
+    "JobPreview": {
+      "type": "object",
+      "properties": { "name": { "type": "string" } }
+    },
+    "JobDetail": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "jobCategoryImageUrl": { "type": "string", "description": "" },
+        "workLocations": {
+          "items": {
+            "type": "object",
+            "description": "",
+            "properties": {
+              "address": { "type": "string", "description": "" },
+              "mapLink": { "type": "string", "description": "" },
+              "location": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                  "type": { "type": "string", "description": "" },
+                  "coordinates": {
+                    "type": "array",
+                    "description": "",
+                    "items": { "type": "number", "description": "" }
+                  }
+                }
+              },
+              "distance": { "type": "number", "description": "" }
+            }
+          }
+        },
+        "jobRole": { "type": "string", "description": "" },
+        "isActive": { "type": "boolean", "description": "" },
+        "noOfOpening": { "type": "number", "description": "" },
+        "salary": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "gte": { "type": "number", "description": "" },
+            "lt": { "type": "number", "description": "" }
+          }
+        },
+        "applicationBased": {
+          "type": "array",
+          "description": "",
+          "items": { "type": "string", "description": "" }
+        },
+        "interviewType": {
+          "type": "array",
+          "description": "",
+          "items": { "type": "string", "description": "" }
+        },
+        "interviewSchedulingType": {
+          "type": "array",
+          "description": "",
+          "items": { "type": "string", "description": "" }
+        },
+        "interViewDates": {
+          "type": "array",
+          "description": "",
+          "items": { "type": "string", "description": "" }
+        },
+        "interviewDay": {
+          "type": "array",
+          "description": "",
+          "items": { "type": "string", "description": "" }
+        },
+        "interviewTime": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "object",
+            "description": "",
+            "properties": {
+              "gte": { "type": "number", "description": "" },
+              "lt": { "type": "number", "description": "" }
+            }
+          }
+        },
+        "jobLocation": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "type": { "type": "string", "description": "" },
+            "coordinates": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "number", "description": "" }
+            }
+          }
+        },
+        "localityName": {
+          "type": "array",
+          "description": "",
+          "items": { "type": "string", "description": "" }
+        },
+        "district": { "type": "string", "description": "" },
+        "state": { "type": "string", "description": "" },
+        "companyName": { "type": "string", "description": "" },
+        "mapLink": { "type": "string", "description": "" },
+        "benefits": {
+          "type": "array",
+          "description": "",
+          "items": { "type": "string", "description": "" }
+        },
+        "experience": { "type": "number", "description": "" },
+        "remoteOnboarding": { "type": "boolean", "description": "" },
+        "physicalInterview": { "type": "boolean", "description": "" },
+        "monthlySpan": { "type": "boolean", "description": "" },
+        "shiftDetails": { "type": "string", "description": "" },
+        "jobResponsibilities": { "type": "string", "description": "" },
+        "employmentType": { "type": "string", "description": "" },
+        "required": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "ageRange": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "gender": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "communicationLanguage": {
+              "type": "array",
+              "description": "",
+              "items": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                  "name": { "type": "string", "description": "" },
+                  "isMandatory": { "type": "boolean", "description": "" }
+                }
+              }
+            },
+            "assets": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "qualification": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            },
+            "documents": {
+              "type": "array",
+              "description": "",
+              "items": { "type": "string", "description": "" }
+            }
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error format",
+      "properties": {
+        "status": { "$ref": "#/definitions/ResponseCodeError" },
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": { "type": "string", "description": "status code of error" },
+            "message": { "type": "string", "description": "error detail" },
+            "errorCode": {
+              "type": "number",
+              "description": "specific error code"
+            },
+            "errors": { "type": "array", "items": { "type": "object" } }
+          }
+        }
+      }
+    }
+  }
+}

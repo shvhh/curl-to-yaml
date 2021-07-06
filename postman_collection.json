@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "c9424d75-16ea-430f-ae66-a2c970de9ad2",
+		"name": "mobile service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get vernac text versions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/api/v1/vernac/text/versions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"v1",
+						"vernac",
+						"text",
+						"versions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get vernac text versions Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/api/v1/vernac/text/versions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"v1",
+						"vernac",
+						"text",
+						"versions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get vernac audio language",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/api/v1/vernac/text/language/english",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"v1",
+						"vernac",
+						"text",
+						"language",
+						"english"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get vernac text language Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/api/v1/vernac/text/language/english",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"v1",
+						"vernac",
+						"text",
+						"language",
+						"english"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get famous city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
